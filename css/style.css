@@ -163,3 +163,41 @@ footer {
 .social-link_telegram {
   background-image: url('../img/social=telegram.svg');
 }
+
+/* Контакты */
+.contact {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.contact li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-link {
+  display: block;
+  padding: 10px 16px 10px 42px;
+  color: var(--txt-color);
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  transition: color 0.2s;
+  border-radius: 8px;
+}
+
+.contact-link:hover {
+  color: var(--green);
+  background-color: transparent;
+}
+
+.contact-link_phone {
+  background-image: url('../img/icon=phone.svg');
+}
+
+.contact-link_mail {
+  background-image: url('../img/icon=email.svg');
+}
+
