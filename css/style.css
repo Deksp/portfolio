@@ -28,7 +28,7 @@
 
 /* Основной текст */
 body {
-    font-family: "Open Sans", "Arial", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 1.5;
@@ -38,34 +38,34 @@ body {
 
 /* Заголовок h1 */
 h1 {
-    font-family: "Open Sans", "Arial", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 60px;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.83;
 }
 
 /* Подзаголовок */
 .subtitle {
-    font-family: "Open Sans", "Arial", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 38px;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: 3.16;
 }
 
 /* Заголовок h2 */
 h2 {
-    font-family: "Open Sans", "Arial", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 4;
 }
 
 /* Заголовок h3 */
 h3 {
-    font-family: "Open Sans", "Arial", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 5;
 }
 
 /* Кнопки и ссылки */
@@ -179,11 +179,11 @@ footer {
 
 .contact-link {
   display: block;
-  padding: 10px 16px 10px 42px;
+  padding: 10px 16px 10px 50px;
   color: var(--txt-color);
   text-decoration: none;
   background-repeat: no-repeat;
-  background-position: 12px center;
+  background-position: 10px center;
   transition: color 0.2s;
   border-radius: 8px;
 }
