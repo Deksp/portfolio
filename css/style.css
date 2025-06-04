@@ -179,11 +179,11 @@ footer {
 
 .contact-link {
   display: block;
-  padding: 10px 16px 10px 50px;
+  padding: 10px 16px 10px 60px;
   color: var(--txt-color);
   text-decoration: none;
   background-repeat: no-repeat;
-  background-position: 10px center;
+  background-position: 16px center;
   transition: color 0.2s;
   border-radius: 8px;
 }
