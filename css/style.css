@@ -26,6 +26,18 @@
     padding: 0 20px;
 }
 
+.main-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-top: 60px;
+    margin-bottom: 120px;
+}
+
+section {
+    margin-bottom: 120px;
+}
+
 /* Основной текст */
 body {
     font-family: 'Open Sans', sans-serif;
@@ -50,6 +62,7 @@ h1 {
     font-size: 38px;
     font-weight: 400;
     line-height: 3.16;
+    margin: 0;
 }
 
 /* Заголовок h2 */
@@ -58,6 +71,14 @@ h2 {
     font-size: 30px;
     font-weight: 700;
     line-height: 4;
+    margin: 0 0 40px;
+}
+
+p {
+    margin: 15px 0;
+}
+p:last-child {
+    margin-bottom: 0;
 }
 
 /* Заголовок h3 */
@@ -97,8 +118,17 @@ button:hover {
 }
 
 /* Главное меню */
+.main-nav {
+    display: flex;
+}
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
 .main-nav a {
-    display: inline-block;
     padding: 8px 16px;
     color: var(--txt-color);
     text-decoration: none;
@@ -109,9 +139,11 @@ button:hover {
     color: var(--green);
 }
 
-footer {
+.main-footer {
     color: var(--bg-color);
     background-color: var(--txt-color);
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 /* Скрытие текста для доступности */
@@ -132,6 +164,8 @@ footer {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  display: flex;
+  gap: 20px;
 }
 
 .social li {
@@ -166,9 +200,11 @@ footer {
 
 /* Контакты */
 .contact {
-  margin: 0;
+  margin: 0 0 40px;
   padding: 0;
   list-style-type: none;
+  display: flex;
+  gap: 20px;
 }
 
 .contact li {
@@ -205,7 +241,38 @@ footer {
   border-radius: 50%;
 }
 
+.intro-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 70px;
+}
+
+.text-wrapper {
+  max-width: 760px;
+}
+
+.intro h1 {
+  margin: 0;
+}
+
+
 /* Навыки */
+.skills-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.skills-controls {
+  display: flex;
+  gap: 20px;
+}
+
+.skills-header h2 {
+  margin-bottom: 0;
+}
 .skill-list {
   margin: 0;
   padding: 0;
