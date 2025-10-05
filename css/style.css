@@ -144,13 +144,6 @@ p:last-child {
 .skill-item {
     text-transform: lowercase;
 }
-.skill-item_html      { background-image: url("../img/skill=html.svg"); }
-.skill-item_css       { background-image: url("../img/skill=css.svg"); }
-.skill-item_cpp       { background-image: url("../img/skill=c++.svg"); }
-.skill-item_c         { background-image: url("../img/c.svg"); }
-.skill-item_python    { background-image: url("../img/skill=python.svg"); }
-.skill-item_javascript{ background-image: url("../img/skill=javascript.svg"); }
-.skill-item_typescript{ background-image: url("../img/typescript-logo.svg"); }
 .skill-level {
     margin: 4px 0 18px;
     padding: 2px;
