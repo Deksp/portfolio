@@ -1,3 +1,24 @@
+function getComparer(key) {
+  return (firstSkill, secondSkill) => {
+    const firstValue = firstSkill[key];
+    const secondValue = secondSkill[key];
+
+    if (typeof firstValue === "string" && typeof secondValue === "string") {
+      return firstValue.localeCompare(secondValue);
+    }
+
+    if (firstValue > secondValue) {
+      return 1;
+    }
+
+    if (firstValue < secondValue) {
+      return -1;
+    }
+
+    return 0;
+  };
+}
+
 const skills = {
   data: [
     { name: "html", level: 40, icon: "skill=html.svg" },
@@ -8,7 +29,6 @@ const skills = {
     { name: "c++", level: 80, icon: "skill=c++.svg" }
   ],
   sortMode: null,
-  sortDirection: "asc",
   listElement: null,
 
   generateList(parentElement) {
@@ -36,36 +56,14 @@ const skills = {
     });
   },
 
-  getComparer(key) {
-    return (firstSkill, secondSkill) => {
-      const firstValue = firstSkill[key];
-      const secondValue = secondSkill[key];
-
-      if (typeof firstValue === "string" && typeof secondValue === "string") {
-        return firstValue.localeCompare(secondValue);
-      }
-
-      if (firstValue > secondValue) {
-        return 1;
-      }
-
-      if (firstValue < secondValue) {
-        return -1;
-      }
-
-      return 0;
-    };
-  },
-
   sortList(type) {
     if (!this.listElement) {
       return;
     }
 
     if (this.sortMode !== type) {
-      this.data.sort(this.getComparer(type));
+      this.data.sort(getComparer(type));
       this.sortMode = type;
-      this.sortDirection = "asc";
 
       const message =
         type === "name"
@@ -74,7 +72,6 @@ const skills = {
       console.log(message);
     } else {
       this.data.reverse();
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
       console.log("инвертировали порядок сортировки");
     }
 
@@ -86,7 +83,6 @@ const skillList = document.querySelector(".skill-list");
 skills.generateList(skillList);
 
 const skillsSortControls = document.querySelector(".skills-sort");
-console.log(skillsSortControls);
 
 if (skillsSortControls) {
   skillsSortControls.addEventListener("click", (event) => {
@@ -100,8 +96,6 @@ if (skillsSortControls) {
       return;
     }
 
-    console.log(target);
-
     const sortType = target.dataset.sortType;
 
     switch (sortType) {
@@ -114,5 +108,62 @@ if (skillsSortControls) {
       default:
         break;
     }
+  });
+}
+
+const menu = {
+  navElement: document.querySelector(".main-nav"),
+  buttonElement: document.querySelector(".nav-btn"),
+
+  open() {
+    if (!this.navElement || !this.buttonElement) {
+      return;
+    }
+
+    this.navElement.classList.remove("main-nav_closed");
+    this.buttonElement.classList.remove("nav-btn_open");
+    this.buttonElement.classList.add("nav-btn_close");
+
+    const buttonText = this.buttonElement.querySelector(".visually-hidden");
+    if (buttonText) {
+      buttonText.textContent = "Закрыть меню";
+    }
+  },
+
+  close() {
+    if (!this.navElement || !this.buttonElement) {
+      return;
+    }
+
+    this.navElement.classList.add("main-nav_closed");
+    this.buttonElement.classList.add("nav-btn_open");
+    this.buttonElement.classList.remove("nav-btn_close");
+
+    const buttonText = this.buttonElement.querySelector(".visually-hidden");
+    if (buttonText) {
+      buttonText.textContent = "Открыть меню";
+    }
+  },
+
+  toggle() {
+    if (!this.navElement) {
+      return;
+    }
+
+    if (this.navElement.classList.contains("main-nav_closed")) {
+      this.open();
+    } else {
+      this.close();
+    }
+  }
+};
+
+// Скрыть меню при загрузке на мобильных
+menu.close();
+
+// Обработчик кнопки меню
+if (menu.buttonElement) {
+  menu.buttonElement.addEventListener("click", () => {
+    menu.toggle();
   });
 }
