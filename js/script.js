@@ -20,22 +20,22 @@ function getComparer(key) {
 }
 
 const skills = {
-  data: [
-    { name: "html", level: 40, icon: "skill=html.svg" },
-    { name: "css", level: 40, icon: "skill=css.svg" },
-    { name: "python", level: 65, icon: "skill=python.svg" },
-    { name: "javascript", level: 50, icon: "skill=javascript.svg" },
-    { name: "typescript", level: 70, icon: "typescript-logo.svg" },
-    { name: "c++", level: 80, icon: "skill=c++.svg" }
-  ],
+  data: [],
   sortMode: null,
   listElement: null,
+  controlsElement: null,
+  messageElement: null,
 
   generateList(parentElement) {
     if (!parentElement) {
       return;
     }
 
+    if (!this.data.length) {
+      return;
+    }
+
+    this.hideMessage();
     this.listElement = parentElement;
     parentElement.innerHTML = "";
 
@@ -64,25 +64,108 @@ const skills = {
     if (this.sortMode !== type) {
       this.data.sort(getComparer(type));
       this.sortMode = type;
-
-      const message =
-        type === "name"
-          ? "отсортировали данные по имени"
-          : "отсортировали данные по уровню";
-      console.log(message);
     } else {
       this.data.reverse();
-      console.log("инвертировали порядок сортировки");
     }
 
     this.generateList(this.listElement);
+  },
+
+  toggleControls(isDisabled) {
+    if (!this.controlsElement) {
+      return;
+    }
+
+    this.controlsElement
+      .querySelectorAll("button")
+      .forEach((button) => {
+        button.disabled = isDisabled;
+      });
+  },
+
+  clearList() {
+    if (this.listElement) {
+      this.listElement.innerHTML = "";
+    }
+  },
+
+  showMessage(text) {
+    if (!this.messageElement) {
+      return;
+    }
+
+    this.messageElement.textContent = text;
+    this.messageElement.classList.remove("skills-message_hidden");
+  },
+
+  hideMessage() {
+    if (!this.messageElement) {
+      return;
+    }
+
+    this.messageElement.textContent = "";
+    this.messageElement.classList.add("skills-message_hidden");
+  },
+
+  async getData(url) {
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data)) {
+        throw new Error("Unexpected data format");
+      }
+
+      this.data = data;
+
+      if (!this.data.length) {
+        this.clearList();
+        this.showMessage("Навыков пока нет.");
+        this.toggleControls(true);
+        return;
+      }
+
+      this.toggleControls(false);
+      this.generateList(this.listElement);
+    } catch (error) {
+      console.error("Не удалось загрузить навыки:", error);
+      this.data = [];
+      this.clearList();
+      this.showMessage("Не удалось загрузить навыки. Попробуйте обновить страницу.");
+      this.toggleControls(true);
+    }
+  },
+
+  init({ listElement, controlsElement, messageElement, dataUrl }) {
+    this.listElement = listElement;
+    this.controlsElement = controlsElement;
+    this.messageElement = messageElement;
+
+    this.toggleControls(true);
+    this.hideMessage();
+    this.clearList();
+
+    if (dataUrl) {
+      this.getData(dataUrl);
+    }
   }
 };
 
 const skillList = document.querySelector(".skill-list");
-skills.generateList(skillList);
-
 const skillsSortControls = document.querySelector(".skills-sort");
+const skillsMessage = document.querySelector(".skills-message");
+
+skills.init({
+  listElement: skillList,
+  controlsElement: skillsSortControls,
+  messageElement: skillsMessage,
+  dataUrl: "db/skills.json"
+});
 
 if (skillsSortControls) {
   skillsSortControls.addEventListener("click", (event) => {

@@ -1,0 +1,9 @@
+[
+  { "name": "html", "level": 40, "icon": "skill=html.svg" },
+  { "name": "css", "level": 40, "icon": "skill=css.svg" },
+  { "name": "python", "level": 65, "icon": "skill=python.svg" },
+  { "name": "javascript", "level": 50, "icon": "skill=javascript.svg" },
+  { "name": "typescript", "level": 70, "icon": "typescript-logo.svg" },
+  { "name": "c++", "level": 80, "icon": "skill=c++.svg" }
+]
+
